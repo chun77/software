@@ -14,12 +14,14 @@ public class View {
 		return view;
 	}
 	
+//公用
 	private JFrame loginView;
 	private JPanel loginPanel = new Login();
 	
 	private JFrame registerView;
 	private Register register;
 	
+//student
 	private JFrame studentView;
 	private StudentScene studentPanel = new StudentScene();
 	
@@ -29,6 +31,22 @@ public class View {
 	private JFrame studentLookup;
 	private StudentLookup lookup;
 
+//admin
+	
+	private JFrame adminView;
+	private AdminScene adminPanel = new AdminScene();
+	
+	private JFrame adminUpdate;
+	private AdminUpdate aupdate;
+	
+	private JFrame adminLookup;
+	private AdminLookup alookup;
+	
+	private JFrame adminAdd;
+	private AdminAdd add;
+	
+	
+
 	private View() {
 		loginView = new JFrame("核酸筛查系统登录");
 		loginView.setSize(1000, 800);
@@ -37,22 +55,18 @@ public class View {
 		loginView.setDefaultCloseOperation(3);
 
 	}
-	
+
+//get
+//公用
 	public JFrame getRegisterView() {
 		return registerView;
 	}
-
-	public JFrame getStudentLookup() {
-		return studentLookup;
-	}
-	public StudentLookup getLookup() {
-		return lookup;
-	}
-
+	
 	public JFrame getLoginView() {
 		return loginView;
 	}
 
+//student
 	public JFrame getStudentView() {
 		return studentView;
 	}
@@ -60,7 +74,66 @@ public class View {
 	public StudentScene getStudentPanel() {
 		return studentPanel;
 	}
+	
+	public JFrame getStudentLookup() {
+		return studentLookup;
+	}
+	
+	public StudentLookup getLookup() {
+		return lookup;
+	}
+	
+	public JFrame getStudentUpdate() {
+		return studentUpdate;
+	}
+	
+	public StudentUpdate getUpdate() {
+		return update;
+	}
 
+//admin
+	public JFrame getAdminView() {
+		return adminView;
+	}
+	
+	public JFrame getAdminLookup() {
+		return adminLookup;
+	}
+	
+	public AdminLookup getaLookup() {
+		return alookup;
+	}
+
+	public AdminScene getAdminPanel() {
+		return adminPanel;
+	}
+	
+
+	public JFrame getAdminUpdate() {
+		return adminUpdate;
+	}
+	
+	public AdminUpdate getAUpdate() {
+		return aupdate;
+	}
+	
+	public JFrame getAdminAdd() {
+		return adminAdd;
+	}
+	
+	public AdminAdd getAdd() {
+		return add;
+	}
+//set
+//公用
+	public void setRegisterView() {
+		registerView = new JFrame("注册信息");
+		register = new Register();
+		registerView.setSize(1000, 800);
+		registerView.add(register);
+		registerView.setDefaultCloseOperation(3);
+	}
+//student
 	public void setStudent() {
 		// TODO Auto-generated method stub
 		studentView = new JFrame("学生选择");
@@ -85,19 +158,41 @@ public class View {
 		studentLookup.setDefaultCloseOperation(3);
 	}
 	
-	public void setRegisterView() {
-		registerView = new JFrame("注册信息");
-		register = new Register();
-		registerView.setSize(1000, 800);
-		registerView.add(register);
-		registerView.setDefaultCloseOperation(3);
-	}
 
-	public StudentUpdate getUpdate() {
-		return update;
-	}
 
-	public JFrame getStudentUpdate() {
-		return studentUpdate;
+//admin
+	public void setAdmin() {
+		// TODO Auto-generated method stub
+		adminView = new JFrame("管理员选择");
+		adminView.setSize(1000, 800);
+		adminView.add(adminPanel);
+		adminView.setDefaultCloseOperation(3);
 	}
+	
+	public void setAdminUpdate() {
+		adminUpdate = new JFrame("管理员修改信息");
+		adminUpdate.setSize(1000,800);
+		aupdate = new AdminUpdate();
+		adminUpdate.add(aupdate);
+		adminUpdate.setDefaultCloseOperation(3);
+	}
+	
+	public void setAdminLookup() {
+		adminLookup = new JFrame("查询核酸结果");
+		adminLookup.setSize(1000,800);
+		alookup = new AdminLookup();
+		adminLookup.add(alookup);
+		adminLookup.setDefaultCloseOperation(3);
+	}
+	
+	public void setAdminAdd() {
+		adminAdd = new JFrame("录入核酸结果");
+		adminAdd.setSize(1000,800);
+		add = new AdminAdd();
+		adminAdd.add(add);
+		adminAdd.setDefaultCloseOperation(3);
+	}
+	
+	
+	
 }
