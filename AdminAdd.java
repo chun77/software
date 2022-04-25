@@ -1,3 +1,9 @@
+/**
+ * @author: Wang Zichun
+ * @className: AdminAdd
+ * @packageName: software
+ * @description: ç®¡ç†å‘˜å½•å…¥æ ¸é…¸ç»“æœç•Œé¢Panel
+ */
 package software;
 
 import java.awt.Color;
@@ -13,19 +19,21 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class AdminAdd extends JPanel{
-	private JButton returnButton = new JButton("·µ»Ø");
-	private JButton add = new JButton("Â¼Èë");
-	private Font font = new Font("ºÚÌå", Font.PLAIN, 30);
+	private JButton returnButton = new JButton("è¿”å›");
+	private JButton add = new JButton("å½•å…¥");
+	private Font font = new Font("é»‘ä½“", Font.PLAIN, 30);
 
 	private JLabel title_id;
-	//ÊäÈëÉí·İÖ¤ºÅ
-	private JLabel title_stuid = new JLabel("Éí·İÖ¤ºÅ£º");
+	//è¾“å…¥èº«ä»½è¯å·
+	private JLabel title_stuid = new JLabel("èº«ä»½è¯å·ï¼š");
 	private JTextField stuid = new JTextField(30);
-	//ÊäÈëºËËá¼ì²â½á¹û
-	private JLabel title_result = new JLabel("ºËËá¼ì²â½á¹û£º");
+	//è¾“å…¥æ ¸é…¸æ£€æµ‹ç»“æœ
+	private JLabel title_result = new JLabel("æ ¸é…¸æ£€æµ‹ç»“æœï¼š");
 	private JTextField result = new JTextField(20);
 	
-	
+	/**
+	 * @description: æ„é€ å‡½æ•°
+	 */	
 	public AdminAdd() {
 		setLayout(null);
 		setBackground(new Color(227, 255, 249));
@@ -49,21 +57,21 @@ public class AdminAdd extends JPanel{
 			public void mousePressed(MouseEvent e) {
 				if (stuid.getText().length() == 0 
 						|| result.getText().length() == 0) {
-					JOptionPane.showMessageDialog(null, "ÇëÊäÈëÍêÕûĞÅÏ¢£¡");
+					JOptionPane.showMessageDialog(null, "è¯·è¾“å…¥å®Œæ•´ä¿¡æ¯ï¼");
 				} else {
 					try {
 						boolean isSuccess = Controller.getControl().add(stuid.getText(),
 								 result.getText());
 						if (isSuccess) {
-							JOptionPane.showMessageDialog(null, "Â¼Èë³É¹¦£¡");
+							JOptionPane.showMessageDialog(null, "å½•å…¥æˆåŠŸï¼");
 						}
 					} catch (ClassNotFoundException e1) {
 						// TODO Auto-generated catch block
-						JOptionPane.showMessageDialog(null, "Â¼ÈëÊ§°Ü£¡");
+						JOptionPane.showMessageDialog(null, "å½•å…¥å¤±è´¥ï¼");
 						e1.printStackTrace();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
-						JOptionPane.showMessageDialog(null, "Â¼ÈëÊ§°Ü£¡");
+						JOptionPane.showMessageDialog(null, "å½•å…¥å¤±è´¥ï¼");
 						e1.printStackTrace();
 					}
 				}
@@ -73,7 +81,7 @@ public class AdminAdd extends JPanel{
 	}
 	
 	public void init() {
-//		title_id = new JLabel("Éí·İÖ¤ºÅ£º" + id);
+//		title_id = new JLabel("èº«ä»½è¯å·ï¼š" + id);
 //		title_id.setLocation(300, 130);
 //		title_id.setSize(500, 80);
 //		title_id.setFont(font);
@@ -93,9 +101,7 @@ public class AdminAdd extends JPanel{
 		add(result);
 		result.setSize(300, 50);
 		result.setFont(font);
-		result.setText("ÒõĞÔ");
+		result.setText("é˜´æ€§");
 		result.setLocation(500, 360);
-
-
 	}
 }

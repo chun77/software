@@ -1,3 +1,9 @@
+/**
+ * @author: Yuan Zhenzhi
+ * @className: StudentLookup
+ * @packageName: software
+ * @description: student look up panel
+ */
 package software;
 import java.awt.Color;
 import java.awt.Font;
@@ -12,12 +18,12 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class StudentLookup extends JPanel{
-	private JButton returnButton =new JButton("·µ»Ø");
-	private Font font=new Font("ºÚÌå",Font.PLAIN,30);
+	private JButton returnButton =new JButton("è¿”å›ž");
+	private Font font=new Font("é»‘ä½“",Font.PLAIN,30);
 	public DefaultTableModel dtm=new DefaultTableModel();
-	private String[] columnname= {"id","¼ì²âÈË","¼ì²âÊ±¼ä","¼ì²â½á¹û"};
+	private String[] columnname= {"id","æ£€æµ‹äºº","æ£€æµ‹æ—¶é—´","æ£€æµ‹ç»“æžœ"};
 	private JTable allTable;
-	private JButton select=new JButton("²éÑ¯");
+	private JButton select=new JButton("æŸ¥è¯¢");
 	private JScrollPane dropdown1;
 	
 	public StudentLookup() {

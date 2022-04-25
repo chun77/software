@@ -1,3 +1,9 @@
+/**
+ * @author: Wang Zichun
+ * @className: AdminUpdate
+ * @packageName: software
+ * @description: admin update result Panel
+ */
 package software;
 
 import java.awt.Color;
@@ -14,14 +20,14 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class AdminUpdate extends JPanel{
-	private JButton returnButton = new JButton("·µ»Ø");
-	private JButton update = new JButton("¸üĞÂ");
-	private Font font = new Font("ºÚÌå", Font.PLAIN, 30);
+	private JButton returnButton = new JButton("è¿”å›");
+	private JButton update = new JButton("æ›´æ–°");
+	private Font font = new Font("é»‘ä½“", Font.PLAIN, 30);
 
 	private JLabel title_id;
-	private JLabel title_password = new JLabel("ÃÜÂë£º");
+	private JLabel title_password = new JLabel("å¯†ç ï¼š");
 	private JPasswordField newpassword = new JPasswordField(40);
-	private JLabel title_name = new JLabel("ĞÕÃû£º");
+	private JLabel title_name = new JLabel("å§“åï¼š");
 	private JTextField newname = new JTextField(25);
 	
 	public AdminUpdate() {
@@ -47,21 +53,21 @@ public class AdminUpdate extends JPanel{
 			public void mousePressed(MouseEvent e) {
 				if (newname.getText().length() == 0 
 						|| newpassword.getText().length() == 0) {
-					JOptionPane.showMessageDialog(null, "ÇëÊäÈëÍêÕûĞÅÏ¢£¡");
+					JOptionPane.showMessageDialog(null, "è¯·è¾“å…¥å®Œæ•´ä¿¡æ¯ï¼");
 				} else {
 					try {
 						boolean isSuccess = Controller.getControl().aupdate(newname.getText(),
 								 newpassword.getText());
 						if (isSuccess) {
-							JOptionPane.showMessageDialog(null, "¸üĞÂ³É¹¦£¡");
+							JOptionPane.showMessageDialog(null, "æ›´æ–°æˆåŠŸï¼");
 						}
 					} catch (ClassNotFoundException e1) {
 						// TODO Auto-generated catch block
-						JOptionPane.showMessageDialog(null, "¸üĞÂÊ§°Ü£¡");
+						JOptionPane.showMessageDialog(null, "æ›´æ–°å¤±è´¥ï¼");
 						e1.printStackTrace();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
-						JOptionPane.showMessageDialog(null, "¸üĞÂÊ§°Ü£¡");
+						JOptionPane.showMessageDialog(null, "æ›´æ–°å¤±è´¥ï¼");
 						e1.printStackTrace();
 					}
 				}
@@ -71,7 +77,7 @@ public class AdminUpdate extends JPanel{
 	}
 	
 	public void init(String id, String username, String userPassword) {
-		title_id = new JLabel("Éí·İÖ¤ºÅ£º" + id);
+		title_id = new JLabel("èº«ä»½è¯å·ï¼š" + id);
 		title_id.setLocation(300, 130);
 		title_id.setSize(500, 80);
 		title_id.setFont(font);

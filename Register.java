@@ -1,3 +1,9 @@
+/**
+ * @author: Yuan Zhenzhi
+ * @className: Register
+ * @packageName: software
+ * @description: user register panel
+ */
 package software;
 
 import java.awt.Color;
@@ -14,15 +20,15 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class Register extends JPanel{
-	private JButton returnButton = new JButton("·µ»Ø");
-	private Font font = new Font("ËÎÌå", Font.BOLD, 30);
-	private JLabel title_id = new JLabel("ÓÃ»§Ãû£º");
-	private JLabel title_password = new JLabel("ÃÜÂë£º");
-	private JLabel title_name = new JLabel("ĞÕÃû£º");
+	private JButton returnButton = new JButton("è¿”å›");
+	private Font font = new Font("å®‹ä½“", Font.BOLD, 30);
+	private JLabel title_id = new JLabel("ç”¨æˆ·åï¼š");
+	private JLabel title_password = new JLabel("å¯†ç ï¼š");
+	private JLabel title_name = new JLabel("å§“åï¼š");
 	private JTextField id = new JTextField(25);
 	private JPasswordField password = new JPasswordField(40);
 	private JTextField name = new JTextField(25);
-	private JButton register = new JButton("×¢²á");
+	private JButton register = new JButton("æ³¨å†Œ");
 
 	public Register() {
 		setBackground(new Color(227, 255, 249));
@@ -58,7 +64,7 @@ public class Register extends JPanel{
 		returnButton.setContentAreaFilled(false);
 		returnButton.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
-				// Çå¿ÕÎÄ±¾¿ò
+				// æ¸…ç©ºæ–‡æœ¬æ¡†
 				name.setText("");
 				password.setText("");
 				id.setText("");
@@ -74,14 +80,14 @@ public class Register extends JPanel{
 		register.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				if (id.getText().length() == 0 || name.getText().length() == 0 || password.getText().length() == 0) {
-					JOptionPane.showMessageDialog(null, "ÇëÊäÈëÍêÕûĞÅÏ¢£¡");
+					JOptionPane.showMessageDialog(null, "è¯·è¾“å…¥å®Œæ•´ä¿¡æ¯ï¼");
 				}
 				try {
 					boolean isSuccess = Controller.getControl().register(id.getText(), name.getText(), password.getText());
 					if (!isSuccess) {
-						JOptionPane.showMessageDialog(null, "Éí·İÖ¤ºÅ²»ºÏ·¨£¡");
+						JOptionPane.showMessageDialog(null, "èº«ä»½è¯å·ä¸åˆæ³•ï¼");
 					} else {
-						JOptionPane.showMessageDialog(null, "×¢²á³É¹¦£¡");
+						JOptionPane.showMessageDialog(null, "æ³¨å†ŒæˆåŠŸï¼");
 						Controller.getControl().registerReturn();
 					}
 				} catch (ClassNotFoundException e1) {

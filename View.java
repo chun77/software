@@ -1,3 +1,9 @@
+/**
+ * @author: Yuan Zhenzhi,Wang Zichun
+ * @className: View
+ * @packageName: software
+ * @description: MVC-View
+ */
 package software;
 
 import java.sql.SQLException;
@@ -14,14 +20,16 @@ public class View {
 		return view;
 	}
 	
-//¹«ÓÃ
+	private JFrame connectView;
+	private DbConnection connect = new DbConnection();
+	//å…¬ç”¨
 	private JFrame loginView;
 	private JPanel loginPanel = new Login();
 	
 	private JFrame registerView;
 	private Register register;
 	
-//student
+	//student
 	private JFrame studentView;
 	private StudentScene studentPanel = new StudentScene();
 	
@@ -31,7 +39,7 @@ public class View {
 	private JFrame studentLookup;
 	private StudentLookup lookup;
 
-//admin
+	//admin
 	
 	private JFrame adminView;
 	private AdminScene adminPanel = new AdminScene();
@@ -48,16 +56,20 @@ public class View {
 	
 
 	private View() {
-		loginView = new JFrame("ºËËáÉ¸²éÏµÍ³µÇÂ¼");
-		loginView.setSize(1000, 800);
-		loginView.setLocation(300, 50);
-		loginView.add(loginPanel);
-		loginView.setDefaultCloseOperation(3);
+		connectView = new JFrame("æ•°æ®åº“è¿æ¥");
+		connectView.setSize(1000, 800);
+		connectView.setLocation(300, 50);
+		connectView.add(connect);
+		connectView.setDefaultCloseOperation(3);
 
 	}
 
-//get
-//¹«ÓÃ
+	public JFrame getConnectView() {
+		return connectView;
+	}
+
+	//get
+	//å…¬ç”¨
 	public JFrame getRegisterView() {
 		return registerView;
 	}
@@ -66,7 +78,7 @@ public class View {
 		return loginView;
 	}
 
-//student
+	//student
 	public JFrame getStudentView() {
 		return studentView;
 	}
@@ -91,7 +103,7 @@ public class View {
 		return update;
 	}
 
-//admin
+	//admin
 	public JFrame getAdminView() {
 		return adminView;
 	}
@@ -124,10 +136,19 @@ public class View {
 	public AdminAdd getAdd() {
 		return add;
 	}
-//set
-//¹«ÓÃ
+	//set
+	//å…¬ç”¨
+	
+	public void setLoginView() {
+		loginView = new JFrame("æ ¸é…¸ç­›æŸ¥ç³»ç»Ÿç™»å½•");
+		loginView.setSize(1000, 800);
+		loginView.setLocation(300, 50);
+		loginView.add(loginPanel);
+		loginView.setDefaultCloseOperation(3);
+	}
+	
 	public void setRegisterView() {
-		registerView = new JFrame("×¢²áĞÅÏ¢");
+		registerView = new JFrame("æ³¨å†Œä¿¡æ¯");
 		register = new Register();
 		registerView.setSize(1000, 800);
 		registerView.add(register);
@@ -136,14 +157,14 @@ public class View {
 //student
 	public void setStudent() {
 		// TODO Auto-generated method stub
-		studentView = new JFrame("Ñ§ÉúÑ¡Ôñ");
+		studentView = new JFrame("å­¦ç”Ÿé€‰æ‹©");
 		studentView.setSize(1000, 800);
 		studentView.add(studentPanel);
 		studentView.setDefaultCloseOperation(3);
 	}
 	
 	public void setStudentUpdate() {
-		studentUpdate = new JFrame("Ñ§ÉúĞŞ¸ÄĞÅÏ¢");
+		studentUpdate = new JFrame("å­¦ç”Ÿä¿®æ”¹ä¿¡æ¯");
 		studentUpdate.setSize(1000,800);
 		update = new StudentUpdate();
 		studentUpdate.add(update);
@@ -151,7 +172,7 @@ public class View {
 	}
 	
 	public void setStudentLookup() {
-		studentLookup = new JFrame("²éÑ¯ºËËá½á¹û");
+		studentLookup = new JFrame("æŸ¥è¯¢æ ¸é…¸ç»“æœ");
 		studentLookup.setSize(1000,800);
 		lookup = new StudentLookup();
 		studentLookup.add(lookup);
@@ -163,14 +184,14 @@ public class View {
 //admin
 	public void setAdmin() {
 		// TODO Auto-generated method stub
-		adminView = new JFrame("¹ÜÀíÔ±Ñ¡Ôñ");
+		adminView = new JFrame("ç®¡ç†å‘˜é€‰æ‹©");
 		adminView.setSize(1000, 800);
 		adminView.add(adminPanel);
 		adminView.setDefaultCloseOperation(3);
 	}
 	
 	public void setAdminUpdate() {
-		adminUpdate = new JFrame("¹ÜÀíÔ±ĞŞ¸ÄĞÅÏ¢");
+		adminUpdate = new JFrame("ç®¡ç†å‘˜ä¿®æ”¹ä¿¡æ¯");
 		adminUpdate.setSize(1000,800);
 		aupdate = new AdminUpdate();
 		adminUpdate.add(aupdate);
@@ -178,7 +199,7 @@ public class View {
 	}
 	
 	public void setAdminLookup() {
-		adminLookup = new JFrame("²éÑ¯ºËËá½á¹û");
+		adminLookup = new JFrame("æŸ¥è¯¢æ ¸é…¸ç»“æœ");
 		adminLookup.setSize(1000,800);
 		alookup = new AdminLookup();
 		adminLookup.add(alookup);
@@ -186,7 +207,7 @@ public class View {
 	}
 	
 	public void setAdminAdd() {
-		adminAdd = new JFrame("Â¼ÈëºËËá½á¹û");
+		adminAdd = new JFrame("å½•å…¥æ ¸é…¸ç»“æœ");
 		adminAdd.setSize(1000,800);
 		add = new AdminAdd();
 		adminAdd.add(add);

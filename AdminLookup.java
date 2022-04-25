@@ -1,3 +1,9 @@
+/**
+ * @author: Wang Zichun
+ * @className: AdminLookup
+ * @packageName: software
+ * @description: admin look up Panel
+ */
 package software;
 import java.awt.Color;
 import java.awt.Font;
@@ -14,14 +20,14 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class AdminLookup extends JPanel{
-	private JButton returnButton =new JButton("·µ»Ø");
-	private Font font=new Font("ºÚÌå",Font.PLAIN,30);
+	private JButton returnButton =new JButton("è¿”å›");
+	private Font font=new Font("é»‘ä½“",Font.PLAIN,30);
 	public DefaultTableModel dtm=new DefaultTableModel();
-	private String[] columnname= {"id","¼ì²âÈË","¼ì²âÊ±¼ä","¼ì²â½á¹û"};
+	private String[] columnname= {"id","æ£€æµ‹äºº","æ£€æµ‹æ—¶é—´","æ£€æµ‹ç»“æœ"};
 	private JTable allTable;
-	private JButton select=new JButton("²éÑ¯");
+	private JButton select=new JButton("æŸ¥è¯¢");
 	private JScrollPane dropdown1;
-	private JLabel title_stuid=new JLabel("Éí·İÖ¤ºÅ£º");
+	private JLabel title_stuid=new JLabel("èº«ä»½è¯å·ï¼š");
 	private JTextField stuid= new JTextField(30);
 	
 	

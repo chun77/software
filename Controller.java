@@ -1,3 +1,9 @@
+/**
+ * @author: Yuan Zhenzhi, Wang Zichun
+ * @className: Controller
+ * @packageName: software
+ * @description: MVC-Control
+ */
 package software;
 
 import java.sql.Connection;
@@ -9,18 +15,18 @@ import java.util.Vector;
 
 
 public class Controller {
-	// …˘√˜Connection∂‘œÛ
+	// Â£∞ÊòéConnectionÂØπË±°
 	public Connection con;
-	// «˝∂Ø≥Ã–Ú√˚
+	// È©±Âä®Á®ãÂ∫èÂêç
 	private String driver = "com.mysql.cj.jdbc.Driver";
-	// URL÷∏œÚ“™∑√Œ µƒ ˝æ›ø‚√˚
-	private String url = "jdbc:mysql://localhost:3316/software";
-	// MySQL≈‰÷√ ±µƒ”√ªß√˚
+	// URLÊåáÂêëË¶ÅËÆøÈóÆÁöÑÊï∞ÊçÆÂ∫ìÂêç
+	private String url = "jdbc:mysql://localhost:3306/software";
+	// MySQLÈÖçÁΩÆÊó∂ÁöÑÁî®Êà∑Âêç
 	private String user = "root";
-	// MySQL≈‰÷√ ±µƒ√‹¬Î
+	// MySQLÈÖçÁΩÆÊó∂ÁöÑÂØÜÁ†Å
 	private String dbpassword = "";
 
-	// µ±«∞”√ªß–≈œ¢
+	// ÂΩìÂâçÁî®Êà∑‰ø°ÊÅØ
 	private String id; 
 	private String username;
 	private String userPassword;
@@ -30,7 +36,43 @@ public class Controller {
 	public Controller() {
 		id = null;
 	}
+	
+	/*java singleton pattern*/
+	private static Controller control = new Controller();
 
+	public static Controller getControl() {
+		return control;
+	}
+	
+	/**
+	 * @description init db information and connect database
+	 * @param dbid 
+	 * @param dbpwd
+	 * @param dbport
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	public boolean connect(String dbid,String dbpwd,String dbport) throws ClassNotFoundException, SQLException {
+		url="jdbc:mysql://localhost:"+dbport+"/software";
+		user=dbid;
+		dbpassword=dbpwd;
+		Class.forName(driver);
+//		System.out.println("success");
+		con = DriverManager.getConnection(url, user, dbpassword);
+		connectToLogin();
+		return true;
+	}
+	
+	/**
+	 * @description user login
+	 * @param uid
+	 * @param password
+	 * @param userIsStu
+	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public boolean logIn(String uid,String password, boolean userIsStu) throws SQLException, ClassNotFoundException {
 		Class.forName(driver);
 //		System.out.println("success");
@@ -82,19 +124,17 @@ public class Controller {
 		return true;
 	}
 	
-	public void toRegister() {
-		// login to register
-		View.getView().getLoginView().setVisible(false);
-		View.getView().setRegisterView();
-		View.getView().getRegisterView().setLocation(View.getView().getLoginView().getX(),
-				View.getView().getLoginView().getY());
-		View.getView().getRegisterView().setVisible(true);
-	}
-	
+	/**
+	 * @description register an account
+	 * @param id
+	 * @param name
+	 * @param password
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public boolean register(String id,String name,String password) 
 			throws ClassNotFoundException, SQLException {
-		// user register
-		// TODO:≈–∂œ…Ì∑›÷§∫≈∫œ∑®–‘
 		if(!checkId(id)) {
 			return false;
 		}
@@ -120,56 +160,14 @@ public class Controller {
 		return true;
 	}
 	
-	private static Controller control = new Controller();
-
-	public static Controller getControl() {
-		// TODO Auto-generated method stub
-		return control;
-	}
-	
-
-	
-	public static void main(String[] args) {
-		View.getView().getLoginView().setVisible(true);
-	}
-//ΩÁ√ÊÃ¯◊™
-//student
-
-	public void studentReturn() {
-		// student scene return to login
-		View.getView().getStudentView().setVisible(false);
-		View.getView().getLoginView().setLocation(View.getView().getStudentView().getX(),
-				View.getView().getStudentView().getY());
-		View.getView().getLoginView().setVisible(true);
-	}
-
-	public void studentToUpdate() {
-		// student scene to update info scene
-		View.getView().getStudentView().setVisible(false);
-		View.getView().setStudentUpdate();
-		View.getView().getUpdate().init(id, username, userPassword);
-		View.getView().getStudentUpdate().setLocation(View.getView().getStudentView().getX(),
-				View.getView().getStudentView().getY());
-		View.getView().getStudentUpdate().setVisible(true);
-	}
-
-	public void studentToLookup() {
-		// student scene to select the result
-		View.getView().getStudentView().setVisible(false);
-		View.getView().setStudentLookup();
-		View.getView().getStudentLookup().setLocation(View.getView().getStudentView().getX(),
-				View.getView().getStudentView().getY());
-		View.getView().getStudentLookup().setVisible(true);
-	}
-
-	public void updateToStudent() {
-		// update return to student scene
-		View.getView().getStudentUpdate().setVisible(false);
-		View.getView().getStudentView().setLocation(View.getView().getStudentUpdate().getX(),
-				View.getView().getStudentUpdate().getY());
-		View.getView().getStudentView().setVisible(true);
-	}
-
+	/**
+	 * @description: student update infomation
+	 * @param newName
+	 * @param newpassword
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public boolean update(String newName, String newpassword) 
 			throws ClassNotFoundException, SQLException{
 		String sql = "update students set stu_name='" + newName + "'" + ","  + "stu_password='" + newpassword
@@ -181,61 +179,15 @@ public class Controller {
 		con.close();
 		return true;
 	}
-
-	public void lookupToStudent() {
-		// lookup scene back to student scene
-		View.getView().getStudentLookup().setVisible(false);
-		View.getView().getStudentView().setLocation(View.getView().getStudentLookup().getX(),
-				View.getView().getStudentLookup().getY());
-		View.getView().getStudentView().setVisible(true);
-	}
 	
-//admin
-	public void adminReturn() {
-		// admin scene return to login
-		View.getView().getAdminView().setVisible(false);
-		View.getView().getLoginView().setLocation(View.getView().getAdminView().getX(),
-				View.getView().getAdminView().getY());
-		View.getView().getLoginView().setVisible(true);
-	}
-
-	public void adminToUpdate() {
-		// admin scene to update info scene
-		View.getView().getAdminView().setVisible(false);
-		View.getView().setAdminUpdate();
-		View.getView().getAUpdate().init(id, username, userPassword);
-		View.getView().getAdminUpdate().setLocation(View.getView().getAdminView().getX(),
-				View.getView().getAdminView().getY());
-		View.getView().getAdminUpdate().setVisible(true);
-	}
-
-	public void adminToLookup() {
-		// admin scene to select the result
-		View.getView().getAdminView().setVisible(false);
-		View.getView().setAdminLookup();
-		View.getView().getAdminLookup().setLocation(View.getView().getAdminView().getX(),
-				View.getView().getAdminView().getY());
-		View.getView().getAdminLookup().setVisible(true);
-	}
-	
-	public void adminToAdd() {
-		// admin scene to add record
-		View.getView().getAdminView().setVisible(false);
-		View.getView().setAdminAdd();
-		View.getView().getAdd().init();;
-		View.getView().getAdminAdd().setLocation(View.getView().getAdminView().getX(),
-				View.getView().getAdminView().getY());
-		View.getView().getAdminAdd().setVisible(true);
-	}
-
-	public void updateToAdmin() {
-		// update return to admin scene
-		View.getView().getAdminUpdate().setVisible(false);
-		View.getView().getAdminView().setLocation(View.getView().getAdminUpdate().getX(),
-				View.getView().getAdminUpdate().getY());
-		View.getView().getAdminView().setVisible(true);
-	}
-
+	/**
+	 * @description admin update information
+	 * @param newName
+	 * @param newpassword
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public boolean aupdate(String newName, String newpassword) 
 			throws ClassNotFoundException, SQLException{
 		String sql = "update admins set admin_name='" + newName + "'" + ","  + "admin_password='" + newpassword
@@ -247,25 +199,16 @@ public class Controller {
 		con.close();
 		return true;
 	}
-
-	public void lookupToAdmin() {
-		// lookup scene back to admin scene
-		View.getView().getAdminLookup().setVisible(false);
-		View.getView().getAdminView().setLocation(View.getView().getAdminLookup().getX(),
-				View.getView().getAdminLookup().getY());
-		View.getView().getAdminView().setVisible(true);
-	}
 	
-	public void addToAdmin() {
-		// add scene back to admin scene
-		View.getView().getAdminAdd().setVisible(false);
-		View.getView().getAdminView().setLocation(View.getView().getAdminAdd().getX(),
-				View.getView().getAdminAdd().getY());
-		View.getView().getAdminView().setVisible(true);
-	}
-	
+	/**
+	 * @description add a record
+	 * @param stuId
+	 * @param result
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public boolean add(String stuId, String result) throws ClassNotFoundException, SQLException{
-		// add a record
 		//why '?
 		String sql = "insert into records (stu_id,admin_id,result) VALUE (" + stuId + ",'"  + id + "','"
 				+result+"')";
@@ -276,8 +219,96 @@ public class Controller {
 		con.close();
 		return true;
 	}
+	
+	/**
+	 * check id is legal
+	 * @param id
+	 * @return
+	 */
+	public boolean checkId(String id){
+		 int sum = 0;
+		 int[] w = new int[17];
+		 char[] checkbit = new char[12];
+		 //Âä†ÊùÉÂõ†Â≠ê
+		 w[0] = 7;
+		 w[1] = 9;
+		 w[2] = 10;
+		 w[3] = 5;
+		 w[4] = 8;
+		 w[5] = 4;
+		 w[6] = 2;
+		 w[7] = 1;
+		 w[8] = 6;
+		 w[9] = 3;
+		 w[10] = 7;
+		 w[11] = 9;
+		 w[12] = 10;
+		 w[13] = 5;
+		 w[14] = 8;
+		 w[15] = 4;
+		 w[16] = 2;
+		 //Ê†°È™åÁ†Å
+		 checkbit[0] = '1';
+		 checkbit[1] = '0';
+		 checkbit[2] = 'X';
+		 checkbit[3] = '9';
+		 checkbit[4] = '8';
+		 checkbit[5] = '7';
+		 checkbit[6] = '6';
+		 checkbit[7] = '5';
+		 checkbit[8] = '4';
+		 checkbit[9] = '3';
+		 checkbit[10] = '2';
+		 checkbit[11] = '\0';
+		 if(id.length() != 18){
+			 return false;
+		 }
+		 char[] number = id.toCharArray();
+		 for(int i=0; i<17; i++){
+			 if(number[i] < '9' || number[i] > '0'){
+				 return false;
+			 }
+		 }
+		 for( int j=0; j<17; j++){
+			 sum = sum + (number[j]-48)*w[j];
+		 }
+		 int a = sum % 11;
+		 if(number[17] != checkbit[a]){
+			 return false;
+		 }
+		 return true;
+	 }
 
-//admin∫Õstudentπ´”√ admin“≤ «≤Èƒ≥∏ˆ—ß…˙µƒºÏ≤‚Ω·π˚
+	public void selectSpecificProject(String stuid) throws SQLException, ClassNotFoundException{
+		Class.forName(driver);
+		con = DriverManager.getConnection(url, user, dbpassword);
+		Statement statement = con.createStatement();
+		String sql = "select * from records where stu_id='"+stuid+"'";
+		ResultSet rs = statement.executeQuery(sql);
+		while (rs.next()) {
+			String stu_id = rs.getString("stu_id");
+			String admin_id = rs.getString("admin_id");
+			String result = rs.getString("result");
+			String time = rs.getString("time");
+			Vector<String> v = new Vector<String>();
+			v.add(stu_id);
+			v.add(admin_id);
+			v.add(result);
+			v.add(time);
+			if(isStudent) {
+				View.getView().getaLookup().dtm.addRow(v);
+			}else {
+				View.getView().getaLookup().dtm.addRow(v);
+			}
+		}
+		
+	}
+	
+	/**
+	 * @description adminÂíåstudentÂÖ¨Áî® admin‰πüÊòØÊü•Êüê‰∏™Â≠¶ÁîüÁöÑÊ£ÄÊµãÁªìÊûú
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public void selectProject() throws SQLException, ClassNotFoundException {
 		// TODO Auto-generated method stub
 		Class.forName(driver);
@@ -302,96 +333,174 @@ public class Controller {
 			}
 		}
 	}
+	
+	public static void main(String[] args) {
+		View.getView().getConnectView().setVisible(true);
+	}
+	
+	/*---------------Interface changes--------------*/
+	/**
+	 * @description login frame to register frame
+	 */
+	public void toRegister() {
+		View.getView().getLoginView().setVisible(false);
+		View.getView().setRegisterView();
+		View.getView().getRegisterView().setLocation(View.getView().getLoginView().getX(),
+				View.getView().getLoginView().getY());
+		View.getView().getRegisterView().setVisible(true);
+	}
+	
+	/**
+	 * @description login frame to register frame
+	 */
+	public void connectToLogin() {
+		View.getView().getConnectView().setVisible(false);
+		View.getView().setLoginView();
+		View.getView().getLoginView().setLocation(View.getView().getConnectView().getX(),
+				View.getView().getConnectView().getY());
+		View.getView().getLoginView().setVisible(true);
+	}
 
+	/*-----------------student interface-----------------*/
+
+	/**
+	 * @description student scene return to login
+	 */
+	public void studentReturn() {
+		View.getView().getStudentView().setVisible(false);
+		View.getView().getLoginView().setLocation(View.getView().getStudentView().getX(),
+				View.getView().getStudentView().getY());
+		View.getView().getLoginView().setVisible(true);
+	}
+
+	/**
+	 * @description student scene to update info scene
+	 */
+	public void studentToUpdate() {
+		View.getView().getStudentView().setVisible(false);
+		View.getView().setStudentUpdate();
+		View.getView().getUpdate().init(id, username, userPassword);
+		View.getView().getStudentUpdate().setLocation(View.getView().getStudentView().getX(),
+				View.getView().getStudentView().getY());
+		View.getView().getStudentUpdate().setVisible(true);
+	}
+
+	/**
+	 * @description student scene to select the result
+	 */
+	public void studentToLookup() {
+		View.getView().getStudentView().setVisible(false);
+		View.getView().setStudentLookup();
+		View.getView().getStudentLookup().setLocation(View.getView().getStudentView().getX(),
+				View.getView().getStudentView().getY());
+		View.getView().getStudentLookup().setVisible(true);
+	}
+
+	/**
+	 * @description update return to student scene
+	 */	
+	public void updateToStudent() {
+		View.getView().getStudentUpdate().setVisible(false);
+		View.getView().getStudentView().setLocation(View.getView().getStudentUpdate().getX(),
+				View.getView().getStudentUpdate().getY());
+		View.getView().getStudentView().setVisible(true);
+	}
+
+
+	/**
+	 * @description lookup scene back to student scene
+	 */	
+	public void lookupToStudent() {
+		View.getView().getStudentLookup().setVisible(false);
+		View.getView().getStudentView().setLocation(View.getView().getStudentLookup().getX(),
+				View.getView().getStudentLookup().getY());
+		View.getView().getStudentView().setVisible(true);
+	}
+	
+	/*-----------------admin interface-----------------*/
+	/**
+	 * @description admin scene return to login
+	 */		
+	public void adminReturn() {
+		View.getView().getAdminView().setVisible(false);
+		View.getView().getLoginView().setLocation(View.getView().getAdminView().getX(),
+				View.getView().getAdminView().getY());
+		View.getView().getLoginView().setVisible(true);
+	}
+
+	/**
+	 * @description admin scene to update info scene
+	 */	
+	public void adminToUpdate() {
+		View.getView().getAdminView().setVisible(false);
+		View.getView().setAdminUpdate();
+		View.getView().getAUpdate().init(id, username, userPassword);
+		View.getView().getAdminUpdate().setLocation(View.getView().getAdminView().getX(),
+				View.getView().getAdminView().getY());
+		View.getView().getAdminUpdate().setVisible(true);
+	}
+
+	/**
+	 * @description admin scene to select the result
+	 */		
+	public void adminToLookup() {
+		View.getView().getAdminView().setVisible(false);
+		View.getView().setAdminLookup();
+		View.getView().getAdminLookup().setLocation(View.getView().getAdminView().getX(),
+				View.getView().getAdminView().getY());
+		View.getView().getAdminLookup().setVisible(true);
+	}
+	
+	/**
+	 * @description admin scene to add record
+	 */	
+	public void adminToAdd() {
+		View.getView().getAdminView().setVisible(false);
+		View.getView().setAdminAdd();
+		View.getView().getAdd().init();;
+		View.getView().getAdminAdd().setLocation(View.getView().getAdminView().getX(),
+				View.getView().getAdminView().getY());
+		View.getView().getAdminAdd().setVisible(true);
+	}
+
+	/**
+	 * @description update return to admin scene
+	 */	
+	public void updateToAdmin() {
+		View.getView().getAdminUpdate().setVisible(false);
+		View.getView().getAdminView().setLocation(View.getView().getAdminUpdate().getX(),
+				View.getView().getAdminUpdate().getY());
+		View.getView().getAdminView().setVisible(true);
+	}
+
+	/**
+	 * @description lookup scene back to admin scene
+	 */	
+	public void lookupToAdmin() {
+		View.getView().getAdminLookup().setVisible(false);
+		View.getView().getAdminView().setLocation(View.getView().getAdminLookup().getX(),
+				View.getView().getAdminLookup().getY());
+		View.getView().getAdminView().setVisible(true);
+	}
+	
+	/**
+	 * @description add scene back to admin scene
+	 */
+	public void addToAdmin() {
+		View.getView().getAdminAdd().setVisible(false);
+		View.getView().getAdminView().setLocation(View.getView().getAdminAdd().getX(),
+				View.getView().getAdminAdd().getY());
+		View.getView().getAdminView().setVisible(true);
+	}
+	
+	/**
+	 * @description register return to login
+	 */
 	public void registerReturn() {
-		// register return to login
 		View.getView().getRegisterView().setVisible(false);
 		View.getView().getLoginView().setLocation(View.getView().getRegisterView().getX(),
 				View.getView().getRegisterView().getY());
 		View.getView().getLoginView().setVisible(true);
 	}
-	
-	public boolean checkId(String id){
-		 int sum = 0;
-		 int[] w = new int[17];
-		 char[] checkbit = new char[12];
-		 //º”»®“Ú◊”
-		 w[0] = 7;
-		 w[1] = 9;
-		 w[2] = 10;
-		 w[3] = 5;
-		 w[4] = 8;
-		 w[5] = 4;
-		 w[6] = 2;
-		 w[7] = 1;
-		 w[8] = 6;
-		 w[9] = 3;
-		 w[10] = 7;
-		 w[11] = 9;
-		 w[12] = 10;
-		 w[13] = 5;
-		 w[14] = 8;
-		 w[15] = 4;
-		 w[16] = 2;
-		 //–£—È¬Î
-		 checkbit[0] = '1';
-		 checkbit[1] = '0';
-		 checkbit[2] = 'X';
-		 checkbit[3] = '9';
-		 checkbit[4] = '8';
-		 checkbit[5] = '7';
-		 checkbit[6] = '6';
-		 checkbit[7] = '5';
-		 checkbit[8] = '4';
-		 checkbit[9] = '3';
-		 checkbit[10] = '2';
-		 checkbit[11] = '\0';
-		 if(id.length() != 18){
-			 return false;
-		 }
-		 char[] number = id.toCharArray();
-		 for(int i=0; i<17; i++){
-			 if(number[i] < '9' || number[i] > '0'){
-//				 error("…Ì∑›÷§≤ª∫œ∑®£¨«∞17ŒªŒ™ ˝◊÷")
-				 return false;
-			 }
-		 }
-		 for( int j=0; j<17; j++){
-			 sum = sum + (number[j]-48)*w[j];
-		 }
-		 int a = sum % 11;
-		 if(number[17] != checkbit[a]){
-//			 error("…Ì∑›÷§≤ª∫œ∑®");
-			 return false;
-		 }
-		 return true;
-	 }
-
-	public void selectSpecificProject(String stuid) throws SQLException, ClassNotFoundException{
-		// TODO Auto-generated method stub
-		Class.forName(driver);
-		con = DriverManager.getConnection(url, user, dbpassword);
-		Statement statement = con.createStatement();
-		String sql = "select * from records where stu_id='"+stuid+"'";
-		ResultSet rs = statement.executeQuery(sql);
-		while (rs.next()) {
-			String stu_id = rs.getString("stu_id");
-			String admin_id = rs.getString("admin_id");
-			String result = rs.getString("result");
-			String time = rs.getString("time");
-			Vector<String> v = new Vector<String>();
-			v.add(stu_id);
-			v.add(admin_id);
-			v.add(result);
-			v.add(time);
-			if(isStudent) {
-				View.getView().getaLookup().dtm.addRow(v);
-			}else {
-				View.getView().getaLookup().dtm.addRow(v);
-			}
-		}
-		
-	}
-
 
 }

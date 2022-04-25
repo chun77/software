@@ -1,3 +1,9 @@
+/**
+ * @author: Yuan Zhenzhi, Wang Zichun
+ * @className: Login
+ * @packageName: software
+ * @description: Login panel
+ */
 package software;
 
 import java.awt.Color;
@@ -16,16 +22,16 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 public class Login extends JPanel{
-	private JLabel title_id = new JLabel("ÓÃ»§Ãû£º");
-	private JLabel title_password = new JLabel("ÃÜÂë£º");
-	private JButton logIn = new JButton("µÇÂ¼");
+	private JLabel title_id = new JLabel("ç”¨æˆ·åï¼š");
+	private JLabel title_password = new JLabel("å¯†ç ï¼š");
+	private JButton logIn = new JButton("ç™»å½•");
 	private JTextField name = new JTextField(25);
 	private JPasswordField password = new JPasswordField(40);
-	private Font font = new Font("ËÎÌå", Font.BOLD, 30);
-	private JRadioButton student = new JRadioButton("Ñ§Éú", true);
-	private JRadioButton admin = new JRadioButton("¹ÜÀíÔ±");
+	private Font font = new Font("å®‹ä½“", Font.BOLD, 30);
+	private JRadioButton student = new JRadioButton("å­¦ç”Ÿ", true);
+	private JRadioButton admin = new JRadioButton("ç®¡ç†å‘˜");
 	private ButtonGroup bp = new ButtonGroup();
-	private JButton register = new JButton("×¢²á");
+	private JButton register = new JButton("æ³¨å†Œ");
 
 	public Login() {
 		setBackground(new Color(227, 255, 249));
@@ -42,21 +48,21 @@ public class Login extends JPanel{
 		name.setLocation(300, 100);
 		name.setSize(400, 100);
 		name.setFont(font);
-		name.setText("210103200204062722");   // ÎªÁËµ÷ÊÔ·½±ã×Ô¼ºÉèµÃid
+		name.setText("210103200204062722");   // ä¸ºäº†è°ƒè¯•æ–¹ä¾¿è‡ªå·±è®¾å¾—id
 		add(password);
 		password.setLocation(300, 300);
 		password.setSize(400, 100);
 		password.setFont(font);
-		password.setText("123456");   // ÎªÁËµ÷ÊÔ·½±ã×Ô¼ºÉèµÄÃÜÂë
+		password.setText("123456");   // ä¸ºäº†è°ƒè¯•æ–¹ä¾¿è‡ªå·±è®¾çš„å¯†ç 
 		add(student);
 		student.setSize(200, 100);
 		student.setLocation(300, 420);
-		student.setFont(new Font("ËÎÌå", Font.BOLD, 23));
+		student.setFont(new Font("å®‹ä½“", Font.BOLD, 23));
 		student.setContentAreaFilled(false);
 		add(admin);
 		admin.setSize(200, 100);
 		admin.setLocation(500, 420);
-		admin.setFont(new Font("ËÎÌå", Font.BOLD, 23));
+		admin.setFont(new Font("å®‹ä½“", Font.BOLD, 23));
 		admin.setContentAreaFilled(false);
 		bp.add(admin);
 		bp.add(student);
@@ -81,13 +87,13 @@ public class Login extends JPanel{
 			public void mousePressed(MouseEvent e) {
 				try {
 					if (name.getText().length() == 0 || password.getText().length() == 0) {
-						JOptionPane.showMessageDialog(null, "ÇëÊäÈëÓÃ»§ÃûÓëÃÜÂë£¡");
+						JOptionPane.showMessageDialog(null, "è¯·è¾“å…¥ç”¨æˆ·åä¸å¯†ç ï¼");
 						return;
 					}
 					boolean isSuccess = Controller.getControl().logIn(name.getText(), password.getText(),
 							student.isSelected());
 					if (!isSuccess) {
-						JOptionPane.showMessageDialog(null, "ÓÃ»§Ãû»òÃÜÂë´íÎó£¡");
+						JOptionPane.showMessageDialog(null, "ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯ï¼");
 					}
 				} catch (SQLException | ClassNotFoundException e1) {
 					// TODO Auto-generated catch block

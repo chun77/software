@@ -1,3 +1,9 @@
+/**
+ * @author: Yuan Zhenzhi
+ * @className: StudentScene
+ * @packageName: software
+ * @description: Student choose panel
+ */
 package software;
 
 import java.awt.Color;
@@ -10,10 +16,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class StudentScene extends JPanel{
-	private JButton complete = new JButton("ĞŞ¸Ä¸öÈËĞÅÏ¢");
-	private JButton select = new JButton("²éÑ¯½á¹û");
-	private JButton returnButton = new JButton("ÍË³öµÇÂ¼");
-	private Font font = new Font("ºÚÌå", Font.PLAIN, 30);
+	private JButton complete = new JButton("ä¿®æ”¹ä¸ªäººä¿¡æ¯");
+	private JButton select = new JButton("æŸ¥è¯¢ç»“æœ");
+	private JButton returnButton = new JButton("é€€å‡ºç™»å½•");
+	private Font font = new Font("é»‘ä½“", Font.PLAIN, 30);
 	private JLabel label;
 	
 	public StudentScene() {
@@ -53,7 +59,7 @@ public class StudentScene extends JPanel{
 	}
 
 	public void setLabel(String id) {
-		label = new JLabel("ÄãºÃ£¬" + id + "!");
+		label = new JLabel("ä½ å¥½ï¼Œ" + id + "!");
 		add(label);
 		label.setSize(300, 50);
 		label.setLocation(50, 20);
